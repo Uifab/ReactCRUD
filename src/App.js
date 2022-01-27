@@ -1,29 +1,42 @@
-import React, { Component }  from 'react';
+import React, { Component, useState }  from 'react';
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 
 
-function App() {
+
+//Pages
+import BookList from './pages/BookList';
+
+const App = () => {
+
   return (
-    <div className="App">
-		<h1>
-		  Hello world
-	  </h1>
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-		  
-		
-        </a>
-      </header>
+
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<BookList/>} />
+        </Routes>
+      </Router>
+  
+    /* <div className="App">
+        
+      <NavBar />
+      
+      <h2>
+          App element 
+      </h2>
+
+      <div className="btn btn-primary">
+        Books
+      </div>
+
 
     </div>
+    */
   );
 }
 
