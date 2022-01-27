@@ -1,34 +1,28 @@
 import React, { Component, useState }  from 'react';
-
+import { Link } from "react-router-dom";
 
 const BookListComponent = props => {
 
-    const { book, setList } = props;
+    const { book } = props;
 
-    const bookData = {
-        name:"Book 1",
-        data1: "Data 1",
-        data2: "Data 2",
-    }
-
-
+    console.log(book);
     return (
 
-        <tr>
+        <tr key={book.id} className={book.id}>
             <td>
                <b>{book.name}</b>
+            </td> 
+
+            <td>
+                {book.description}
             </td>
 
             <td>
-                {book.data1}
+                {book.date_add}
             </td>
 
             <td>
-                {book.data2}
-            </td>
-
-            <td>
-                <div className="btn btn-primary">View</div>
+                <Link to={'viewBook'} className="btn btn-primary" > View</Link>
             </td>
         </tr>
     );

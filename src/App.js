@@ -11,6 +11,7 @@ import {
 
 //Pages
 import BookList from './pages/BookList';
+import BookPage from './pages/BookPage';
 
 const App = () => {
 
@@ -18,7 +19,8 @@ const App = () => {
 
       <Router>
         <Routes>
-          <Route exact path="/" element={<BookList/>} />
+          <Route exact path="/"             element={<BookList/>} />
+          <Route exact path="/viewStudent"  element={<BookList/>} />
         </Routes>
       </Router>
   
