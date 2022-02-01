@@ -22,7 +22,7 @@ const BookListComponent = props => {
             </td>
 
             <td>
-                <Link to={'viewBook'} className="btn btn-primary" > View</Link>
+                <Link to={'viewBook/'+book.id } className="btn btn-primary" book={book}> View</Link>
             </td>
         </tr>
     );

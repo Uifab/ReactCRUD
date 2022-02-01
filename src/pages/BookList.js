@@ -14,13 +14,6 @@ class BookList extends Component{
             DataisLoaded: false,
             booksAux: []
         };
-
-        this.state.booksAux = [
-            { name : "Book 1" },
-            { name : "Book 2" },
-            { name : "Book 3" },
-            { name : "Book 4" }
-        ];
     }
    
     // ComponentDidMount is used to
@@ -73,6 +66,12 @@ class BookList extends Component{
                         { books.map((element, i) => {     
                                 return <BookListComponent book={element} key={element.id} />  
                         })}
+                        
+                        <tr>
+                            <td  colSpan="4">
+                                <a className="btn btn-primary w-75 m-auto d-block"> Add book </a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
