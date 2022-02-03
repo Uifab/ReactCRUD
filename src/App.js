@@ -12,6 +12,7 @@ import {
 //Pages
 import BookList from './pages/BookList';
 import BookPage from './pages/BookPage';
+import BookAddEditPage from "./pages/BookAddEditPage";
 
 const App = () => {
 
@@ -19,26 +20,12 @@ const App = () => {
 
       <Router>
         <Routes>
-          <Route exact path="/"             element={<BookList/>} />
-          <Route exact path="/viewBook/:id" element={<BookPage/>} />
+			<Route exact path="/"             	element={<BookList/>} />
+			<Route exact path="/viewBook/:id" 	element={<BookPage/>} />
+			<Route exact path="/add"          	element={<BookAddEditPage/>} />
+			<Route exact path="/edit/:id"		element={<BookAddEditPage/>} />
         </Routes>
       </Router>
-  
-    /* <div className="App">
-        
-      <NavBar />
-      
-      <h2>
-          App element 
-      </h2>
-
-      <div className="btn btn-primary">
-        Books
-      </div>
-
-
-    </div>
-    */
   );
 }
 

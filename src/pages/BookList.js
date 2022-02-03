@@ -1,4 +1,5 @@
 import React, { Component, useState }  from 'react';
+import { Link } from "react-router-dom";
 
 import BookListComponent from '../components/BookListComponent';
 
@@ -68,8 +69,8 @@ class BookList extends Component{
                         })}
                         
                         <tr>
-                            <td  colSpan="4">
-                                <a className="btn btn-primary w-75 m-auto d-block"> Add book </a>
+                            <td  colSpan="5">
+                                <Link to="/add" className="btn btn-success w-75 d-block m-auto" >Add book</Link>
                             </td>
                         </tr>
                     </tbody>
