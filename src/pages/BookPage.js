@@ -12,7 +12,7 @@ function BookPage(){
     let [book, fetchBook] = useState([]);
     
     function getData(){
-        axios("http://uifab.ddns.net/lara/api/library/getBooks?bid="+id)
+        axios("http://uifab.ddns.net/lara/api/library/book?bid="+id)
                     .then((json) => {
                         fetchBook ( json.data.book );
                     });

@@ -20,7 +20,7 @@ class BookList extends Component{
     // ComponentDidMount is used to
     // execute the code 
     componentDidMount() {
-        fetch( "http://uifab.ddns.net/lara/api/library/getBooks")
+        fetch( "http://uifab.ddns.net/lara/api/library/book")
             .then((res) => res.json())
             .then((json) => {
                 this.setState({

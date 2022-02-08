@@ -23,21 +23,43 @@ function BookAddEditPage(){
         auxBook[event.target.name] = event.target.value;
 
         setBook(auxBook);
+    }
 
+    function handleSubmit(event) {
+        
+        console.log("submit",event);
 
+        let [ name, description, date ] = event.target;
+
+        let formData ={
+            'bookid'        : id,
+            'name'          : name.value,
+            'description'   : description.value,
+            'date_add'      : date.value,
+            'action'        : 'edit'
+        };
+        
+        axios("http://uifab.ddns.net/lara/api/library/book", {params:formData})
+            .then((response) => {
+            
+                console.log("Edit response", response);
+            });
+
+        event.preventDefault();
+
+      }
+    
+
+    function getData(){
+        axios("http://uifab.ddns.net/lara/api/library/book?bid="+id)
+                    .then((json) => {
+                        setBook ( json.data.book );
+                        console.log("init Book");
+                    });
     }
 
     useLayoutEffect(() => {
-       
-        let auxBook = {
-            name : "title",
-            description: "desc",
-            date_add : "",
-        };
-    
-        setBook( auxBook );
-
-        console.log("init Book");
+        getData();
     }, [])
 
 
@@ -46,7 +68,7 @@ function BookAddEditPage(){
             { console.log("render", book.description) }
             <h1><GetEditOrAddText id={id} /> Book</h1>
 
-            <form action="url" method="POST" >
+            <form onSubmit={handleSubmit} >
                 <table className="table table-striped w-100">
                     
                     <tbody>
