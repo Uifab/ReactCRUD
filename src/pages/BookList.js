@@ -36,8 +36,6 @@ class BookList extends Component{
 
         const { DataisLoaded, books } = this.state;
 
-        console.log(books);
-
         if (!DataisLoaded) 
             return <div>
                         <h1> Loading </h1> 

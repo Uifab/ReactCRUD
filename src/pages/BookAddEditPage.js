@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect, useLayoutEffect  }  from 'react';
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import $ from 'jquery';
 
 //Common
 import BackButton from '../common/BackButton';
@@ -13,11 +14,11 @@ function BookAddEditPage(){
 
     id = parseInt(id) || 0;
 
+    let requestAxios = false; 
+
 
     function handleChange( event ){
 
-        console.log("change", event.target.name, event.target.value );
-        
         let auxBook = book;
 
         auxBook[event.target.name] = event.target.value;
@@ -25,36 +26,85 @@ function BookAddEditPage(){
         setBook(auxBook);
     }
 
+    function setNotification( msg, type ){
+
+        if( !msg )
+            return ;
+        
+            console.log("asd");
+
+
+        $("#root").prepend('<div class="alert alert-'+type+'">'+msg+'</div>');
+
+        setTimeout(function(){
+            $(".alert").remove();
+        },5000);
+
+    }
+
     function handleSubmit(event) {
         
-        console.log("submit",event);
-
-        let [ name, description, date ] = event.target;
+        let [ bid, name, description, date ] = event.target;
 
         let formData ={
             'bookid'        : id,
             'name'          : name.value,
             'description'   : description.value,
             'date_add'      : date.value,
-            'action'        : 'edit'
+            'action'        : id?"edit":"add"
         };
+
+        console.log(formData);
         
+        if( requestAxios )
+        {
+            console.log( 'Peticion en curso' );
+            event.preventDefault();
+            return;
+        }
+
+        requestAxios = true;
+
         axios("http://uifab.ddns.net/lara/api/library/book", {params:formData})
             .then((response) => {
-            
+                
+                let notType = "success";
+                if(response.data.code >= 200)
+                    notType = "warning";
+                
+
+                setNotification(  response.data.text, notType );
+
+
+                requestAxios = false;
+
                 console.log("Edit response", response);
+
+
             });
 
         event.preventDefault();
 
-      }
+        }
     
 
     function getData(){
+
+        if( !id ){
+            //Create empty book
+            let bookAux = {
+                'id'            : 0,
+                'name'          : '',
+                'description'   : '',
+                'date_add'      : new Date().toISOString().slice(0,10)
+            }
+            setBook(bookAux);
+            return;
+        }
+
         axios("http://uifab.ddns.net/lara/api/library/book?bid="+id)
                     .then((json) => {
                         setBook ( json.data.book );
-                        console.log("init Book");
                     });
     }
 
@@ -65,7 +115,6 @@ function BookAddEditPage(){
 
     return (
         <>
-            { console.log("render", book.description) }
             <h1><GetEditOrAddText id={id} /> Book</h1>
 
             <form onSubmit={handleSubmit} >
@@ -74,11 +123,21 @@ function BookAddEditPage(){
                     <tbody>
                         <tr>
                             <td>
+                                <b>Id</b>
+                            </td>
+
+                            <td>
+                                <input readOnly type="text"  name="id" id="inputBookId" className="disabled form-control"  placeholder="Id" defaultValue={ book.id || ''  } />
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
                                 <b>Title</b>
                             </td>
 
                             <td>
-                                <input type="text"  name="name" id="inputBookTitle" className="form-control"  placeholder="Book Title" defaultValue={ book.name || ''  } onChange={handleChange} />
+                                <input required type="text"  name="name" id="inputBookTitle" className="form-control"  placeholder="Book Title" defaultValue={ book.name || ''  } onChange={handleChange} />
                             </td>
 
                         </tr>
@@ -99,7 +158,7 @@ function BookAddEditPage(){
                             </td>
                             
                             <td>
-                                <input type="date" name="date_add" id="inputBookDate"  defaultValue={ book.date_add || '' } onChange={handleChange} />
+                                <input required type="date" name="date_add" id="inputBookDate"  defaultValue={ book.date_add || '' } onChange={handleChange} />
                             </td>
                         </tr>
                         

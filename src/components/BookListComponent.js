@@ -5,7 +5,6 @@ const BookListComponent = props => {
 
     const { book } = props;
 
-    console.log(book);
     return (
 
         <tr key={book.id} className={book.id}>

@@ -17,15 +17,16 @@ import BookAddEditPage from "./pages/BookAddEditPage";
 const App = () => {
 
   return (
-
-      <Router>
+    
+      <Router  basename="/lara/library/">
         <Routes>
 			<Route exact path="/"             	element={<BookList/>} />
 			<Route exact path="/viewBook/:id" 	element={<BookPage/>} />
 			<Route exact path="/add"          	element={<BookAddEditPage/>} />
-			<Route exact path="/edit/:id"		element={<BookAddEditPage/>} />
+			<Route exact path="/edit/:id"		    element={<BookAddEditPage/>} />
         </Routes>
       </Router>
+
   );
 }
 
