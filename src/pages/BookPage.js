@@ -14,7 +14,7 @@ function BookPage(){
     function getData(){
         axios("http://uifab.ddns.net/lara/api/library/book?bid="+id)
                     .then((json) => {
-                        fetchBook ( json.data.book );
+                        fetchBook ( json.data.book[0] );
                     });
     }
 
