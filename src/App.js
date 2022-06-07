@@ -20,10 +20,10 @@ const App = () => {
     
       <Router  basename="/lara/library/">
         <Routes>
-			<Route exact path="/"             	element={<BookList/>} />
-			<Route exact path="/viewBook/:id" 	element={<BookPage/>} />
-			<Route exact path="/add"          	element={<BookAddEditPage/>} />
-			<Route exact path="/edit/:id"		    element={<BookAddEditPage/>} />
+          <Route exact path="/"             	element={<BookList/>} />
+          <Route exact path="/viewBook/:id" 	element={<BookPage/>} />
+          <Route exact path="/add"          	element={<BookAddEditPage/>} />
+          <Route exact path="/edit/:id"		    element={<BookAddEditPage/>} />
         </Routes>
       </Router>
 

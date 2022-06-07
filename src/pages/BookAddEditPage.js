@@ -104,7 +104,7 @@ function BookAddEditPage(){
 
         axios("http://uifab.ddns.net/lara/api/library/book?bid="+id)
                     .then((json) => {
-                        setBook ( json.data.book );
+                        setBook ( json.data.book[0] );
                     });
     }
 
